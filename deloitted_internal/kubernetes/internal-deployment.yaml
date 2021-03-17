@@ -2,26 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: events-external
-  name: events-external
+    app: events-internal
+  name: events-internal
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: events-external
+      app: events-internal
   strategy: {}
   template:
     metadata:
       labels:
-        app: events-external
+        app: events-internal
     spec:
       containers:
-      - image: gcr.io/mar-roidtc321/external_image
-        name: events-external
+      - image: gcr.io/mar-roidtc305/internal-image:v1.0.2
+        name: events-internal
         imagePullPolicy: "Always"
-        env:
-        - name: SERVER
-          value: "http://events-internal:8082"
         resources:
           requests:
             memory: "128Mi"
